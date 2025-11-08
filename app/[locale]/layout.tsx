@@ -56,12 +56,14 @@ export default async function LocaleLayout({
     const currentLocale = locale || i18n.defaultLocale;
 
     const pageData = await fetchContentType('global', { 
-        filters: { locale: currentLocale }
+        filters: { locale: currentLocale },
+        populate: '*'
     }, true);
 
     // Fetch menu data from Strapi collection-type "menu"
     const menuData = await fetchContentTypeClient('menus', {
-        filters: { locale: currentLocale }
+        filters: { locale: currentLocale },
+        populate: '*'
     });
 
     const cookieTranslations = {

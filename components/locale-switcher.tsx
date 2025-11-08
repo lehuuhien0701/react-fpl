@@ -130,7 +130,7 @@ export function LocaleSwitcher({
       </div>
 
       {isOpen && !pathname.includes("/products/") && (
-        <div className="absolute top-full left-[-10px] z-10 pt-6 flex flex-wrap-reverse gap-3 bg-white w-20">
+        <div className="absolute top-full left-[-10px] z-10 pt-6 flex flex-wrap-reverse gap-3 bg-white w-20 pb-[10px]">
           {(pathname.includes('/blog') 
             ? i18n.locales 
             : Object.keys(localizedSlugs).length > 0 
@@ -144,7 +144,7 @@ export function LocaleSwitcher({
                 href={generateLocalizedPath(locale)}
                 onClick={() => setIsOpen(false)}
               >
-                <div className="flex items-center justify-center p-[10px]">
+                <div className="flex items-center justify-center px-[10px]">
                   <BlurImage
                     src={`/${locale}.svg`}
                     alt={locale}
