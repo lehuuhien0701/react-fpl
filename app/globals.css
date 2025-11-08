@@ -1,0 +1,102 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import "./prism.css";
+
+/* Gộp tất cả biến :root vào một nơi */
+p {
+  @apply p-0 mb-4 m-0;
+} 
+:root {
+  --foreground-rgb: 255, 255, 255;
+  --custom-gradient: linear-gradient(270deg, rgba(26, 27, 30, 0) 65.39%, #1A1B1E 100%);
+  --beige-gradient: linear-gradient(360deg, rgba(216, 214, 204, 0.2) 22.7%, #E8E6DF 97.34%);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+  }
+}
+
+a, button {
+  @apply transition-all duration-200 ease-linear;
+}
+
+body {
+  @apply text-[rgb(var(--foreground-rgb))];
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  .bg-custom-gradient {
+    background-image: var(--custom-gradient);
+  }
+  .bg-beige-gradient {
+    background-image: var(--beige-gradient);
+  }
+ 
+}
+.ct-services-details strong {
+  @apply block;
+}
+.ct-services-details ul li {
+  @apply relative pl-[15px];
+}
+ .li-dot {
+    
+  }
+/* Đưa ::before ra ngoài @layer utilities để tránh lỗi build */
+.ct-services-details ul li::before {
+  content: ''; 
+  @apply top-[11px] left-0 absolute align-middle rounded-full w-[3px] h-[3px]; 
+  background-color: var(--tw-prose-bullets, theme('colors.primary')); 
+}
+
+.designed_developed_by span:first-child {
+  @apply flex items-center gap-2 mr-2 w-48 md:w-auto;
+}
+.custom-h2 h2 {
+  @apply text-base leading-6 text-secondary font-semibold mb-2;  
+}
+.language-mobile svg {
+  @apply hidden;
+}
+
+
+
+
+@layer components {
+  .custom-radio-button::before {
+    content: '';
+    @apply h-[10px] w-[10px] rounded-full bg-transparent transition-all duration-200 absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2;
+  }
+  .peer:checked + .custom-radio-button {
+    @apply border-[#228EA9];
+  }
+  .peer:checked + .custom-radio-button::before {
+    @apply bg-[#228EA9];
+  }
+  .custom-checkbox-button2 {
+    @apply relative h-[18px] w-[18px] rounded-[4px] border-2 border-[#cdccd899] 
+           flex items-center justify-center transition-all duration-200; 
+  }
+  .peer2:checked + .custom-checkbox-button2 {
+    @apply border-[#cdccd899] bg-[#000000]; 
+  }
+  .peer2:checked + .custom-checkbox-button2 > svg {
+    @apply opacity-100;
+  }
+} /* <-- Đã thêm dấu đóng ngoặc cho @layer components */
+
+html {
+  font-family: 'Inter', -apple-system, Roboto, Helvetica, sans-serif;
+}
+
+body {
+  font-family: 'Barlow', Inter, -apple-system, Roboto, Helvetica, sans-serif; 
+  -webkit-font-smoothing: antialiased;
+  @apply font-normal text-sm leading-[26px] text-primary text-primary;  
+}

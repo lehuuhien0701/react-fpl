@@ -1,0 +1,160 @@
+"use client";
+import { Container } from "@/components/container";
+import { strapiImage } from '@/lib/strapi/strapiImage';
+import React, { useRef, useState, useEffect } from "react";
+import Image from 'next/image';
+import parse from "html-react-parser";
+
+export const Services = ({
+  QuestionBlock,
+  questionblock,
+  heading = "",
+  sub_heading = "",
+}: {
+  QuestionBlock?: any;
+  questionblock?: any;
+  heading?: string;
+  sub_heading?: string;
+}) => {
+  // Normalize incoming sources to a single array `questions` 
+  const raw = QuestionBlock ?? questionblock ?? [];
+  const questions: any[] = Array.isArray(raw)
+    ? raw
+    : raw?.data && Array.isArray(raw.data)
+      ? raw.data.map((q: any) => q.attributes ?? q)
+      : [];
+
+  const [open, setOpen] = useState<number | null>(0);
+  const contentRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  useEffect(() => {
+    if (!questions || !Array.isArray(questions)) return;
+    questions.forEach((_, idx) => {
+      const el = contentRefs.current[idx];
+      if (!el) return;
+      el.style.overflow = 'hidden';
+      el.style.transition = 'height 220ms ease, opacity 200ms ease';
+      if (open === idx) {
+        const target = el.scrollHeight;
+        el.style.height = target + 'px';
+        el.style.opacity = '1';
+        const t = setTimeout(() => { el.style.height = ''; }, 240);
+        return () => clearTimeout(t);
+      } else {
+        el.style.height = el.scrollHeight + 'px';
+        el.offsetHeight;
+        el.style.height = '0px';
+        el.style.opacity = '0';
+      }
+    });
+  }, [open, questions.length]);
+
+  if (!questions || !Array.isArray(questions) || questions.length === 0) {
+    return <div className="text-center py-10 text-gray-400">No FAQs found.</div>;
+  }
+
+  // new helper: pick media field from item (supports Icon / icon / image / Image ...)
+  const getMediaField = (obj: any) => {
+    if (!obj) return null;
+    return obj.icon ?? obj.Icon ?? obj.image ?? obj.Image ?? obj.media ?? obj.Media ?? null;
+  };
+
+  // new helper: extract url from common Strapi media shapes
+  const extractMediaUrl = (media: any) => {
+    if (!media) return null;
+    if (typeof media === "string") return media;
+    if (media.url) return media.url;
+    if (media.attributes?.url) return media.attributes.url;
+    if (media.data?.attributes?.url) return media.data.attributes.url;
+    if (Array.isArray(media.data) && media.data[0]?.attributes?.url) return media.data[0].attributes.url;
+    if (media.formats?.thumbnail?.url) return media.formats.thumbnail.url;
+    if (media.attributes?.formats?.thumbnail?.url) return media.attributes.formats.thumbnail.url;
+    return null;
+  };
+
+  // update safeImageSrc to use extractMediaUrl
+  const safeImageSrc = (media: any, fallback: string) => {
+    try {
+      const url = extractMediaUrl(media);
+      return strapiImage(url) ?? fallback;
+    } catch {
+      return fallback;
+    }
+  };
+
+  return (
+    <div className='pb-14 py-20 md:py-[100px] min-h-[900px] relative'>
+      <div className='max-w-[1400px] mx-auto w-full px-5 md:px-10 lg:px-20'>
+        <div className='max-w-[840px] m-auto relative z-[9999]'>
+          <div className='box-question'>
+            {questions.map((item: any, idx: number) => (
+              <div key={idx} className='bg-white border-2 border-[#CDCCD8] shadow-[0px_20px_50px_-12px_rgba(0,0,0,0.08)] p-6 mb-4'>
+                <div className='flex items-center'>
+                  {/* use getMediaField + safeImageSrc so Icon field is resolved robustly */}
+                  <Image
+                    className='mr-4'
+                    alt={item.icon?.alternativeText ?? item.Icon?.alternativeText ?? ''}
+                    src={safeImageSrc(getMediaField(item), "/icon1.svg")}
+                    width={30}
+                    height={30}
+                    priority
+                  />
+                  <h3
+                    onClick={() => setOpen(open === idx ? null : idx)}
+                    className='font-medium text-xl leading-[30px] text-secondary relative pr-10 w-full cursor-pointer'
+                  >
+                    {parse(String(item.title ?? item.question ?? ''))}
+                    <span className={`absolute top-0 right-0 w-[30px] h-[30px] rounded-full flex items-center justify-center ${open === idx ? 'bg-[#2F324A]' : 'bg-[#ffffff] shadow-[6px_10px_20px_rgba(0,0,0,0.12)]'}`}>
+                      <svg
+                        width="12"
+                        height="8"
+                        viewBox="0 0 12 8"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                        aria-hidden="true"
+                        focusable="false"
+                        style={{ transform: open === idx ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 220ms ease' }}
+                      >
+                        <path
+                          d="M1 2L6 7L11 2"
+                          stroke={open === idx ? "#FFFFFF" : "#2F324A"}
+                          strokeWidth={2}
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          fill="none"
+                        />
+                      </svg>
+                    </span>
+                  </h3>
+                </div>
+                <div
+                  ref={el => { contentRefs.current[idx] = el; }}
+                  className=''
+                  style={{ height: open === idx ? undefined : 0, opacity: open === idx ? 1 : 0 }}
+                >
+                  {open === idx && (
+                    <div className='mt-5'>
+                      {item.sub_title && (
+                        <p>{parse(String(item.sub_title))}</p>
+                      )}
+                      {item.answer && (
+                        <div>{parse(String(item.answer))}</div>
+                      )}
+                    </div>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+      <div className=''>
+        <div 
+          className="min-h-[332px] absolute z-10 left-0 right-0 bottom-0 overflow-hidden" 
+          style={{ backgroundImage: "url('/Vector3.svg')", backgroundRepeat: "no-repeat", backgroundPosition: "bottom center", backgroundSize: "cover" }}
+        > 
+        </div>
+      </div> 
+    </div>
+  );
+};
