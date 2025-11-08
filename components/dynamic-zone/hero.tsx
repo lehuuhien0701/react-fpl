@@ -14,6 +14,7 @@ export const Hero = ({
   background:any[];
 }) => {
 
+  console.log("Hero background:", background);
   // helper to safely get strapi image url or fallback
   const safeImageSrc = (media: any, fallback: string) => {
     try {

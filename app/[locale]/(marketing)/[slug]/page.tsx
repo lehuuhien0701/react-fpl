@@ -34,6 +34,7 @@ export default async function Page({ params }: { params: { locale: string, slug:
         slug: params.slug,
         locale: params.locale,
       },
+      populate: "*",
     },
     true,
   );
@@ -45,6 +46,7 @@ export default async function Page({ params }: { params: { locale: string, slug:
     },
     { [params.locale]: params.slug }
   ) || { [params.locale]: params.slug };
+
 
   return (
     <>

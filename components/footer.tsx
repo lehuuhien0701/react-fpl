@@ -94,7 +94,7 @@ export const Footer = ({ data, locale }: { data: any, locale: string }) => {
         <div className="max-w-[1400px] mx-auto w-full pt-0 py-20">
           <div className="xl:flex items-center text-[#CDCCD8] justify-between">
             <div className='text-center xl:text-left'>
-							<p>{parse(copyright)}</p>
+							<p>{parse(copyright)} </p>
 						</div>
 						<div className='justify-center xl:justify-end flex items-center flex-wrap designed_developed_by'>
 							<p className='flex items-center'>{parse(designed_developed_by)}</p>

@@ -181,6 +181,11 @@ export function Navbar({ data, logo, footer, locale }: Props) {
 	};
 
 	function renderMenuItems(menuData: any[]) {
+		// Ensure menuData is an array
+		if (!Array.isArray(menuData)) {
+			return [];
+		}
+
 		return menuData
 			.filter(item => item.show_in_menu && !item.parent) // Top-level items
 			.sort((a, b) => a.order - b.order) // Sort by order

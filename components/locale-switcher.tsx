@@ -21,6 +21,12 @@ export function LocaleSwitcher({
   const { localizedSlugs } = state;
 
   const pathname = usePathname(); // Current path
+
+  // Ensure pathname is valid
+  if (!pathname) {
+    return null; // Return null to avoid rendering the component
+  }
+
   const segments = pathname.split("/"); // Split path into segments
 
   // Generate localized path for each locale
@@ -131,7 +137,7 @@ export function LocaleSwitcher({
 
       {isOpen && !pathname.includes("/products/") && (
         <div className="absolute top-full left-[-10px] z-10 pt-6 flex flex-wrap-reverse gap-3 bg-white w-20 pb-[10px]">
-          {(pathname.includes('/blog') 
+          {(pathname.includes('/blog')  
             ? i18n.locales 
             : Object.keys(localizedSlugs).length > 0 
               ? Object.keys(localizedSlugs) 
