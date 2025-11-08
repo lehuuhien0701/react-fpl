@@ -1,6 +1,6 @@
 import qs from "qs";
 
-const STRAPI_BASE = process.env.NEXT_PUBLIC_STRAPI_API_URL || process.env.STRAPI_API_URL || "http://localhost:1337";
+const STRAPI_BASE = process.env.NEXT_PUBLIC_API_URL || process.env.STRAPI_API_URL || "http://localhost:1337";
 const API_TOKEN = process.env.NEXT_PUBLIC_STRAPI_API_TOKEN || process.env.STRAPI_API_TOKEN;
 
 export default async function fetchContentTypeClient(

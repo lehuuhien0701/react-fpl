@@ -64,7 +64,9 @@ body {
 .language-mobile svg {
   @apply hidden;
 }
-
+.language-mobile a {
+  @apply opacity-100
+}
 
 
 
