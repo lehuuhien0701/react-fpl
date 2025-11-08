@@ -1,4 +1,4 @@
-name: Deploy to Server
+name: Deploy React Frontend
 
 on:
   push:
@@ -16,8 +16,9 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SERVER_SSH_KEY }}
           script: |
-            cd /home/projects/strapi-fiduciaire-premier
+            cd /home/projects/react-fiduciaire-premier
             git pull origin main
             yarn install
             yarn build
-            docker compose up -d --build
+            cp -r build/* /var/www/html/
+            # Hoặc lệnh restart nginx, pm2, docker nếu cần
