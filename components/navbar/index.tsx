@@ -9,7 +9,7 @@ import { BookingForm } from "../booking-form";
 import { LocaleSwitcher } from "../locale-switcher";
 import { translations } from '@/translations/common';
 import { Locale } from '@/translations/types';
-import { useParams } from 'next/navigation';
+import { useParams, usePathname } from 'next/navigation';
 import { i18n } from "@/i18n.config";
 
 interface Props {
@@ -22,12 +22,12 @@ interface Props {
 export function Navbar({ data, logo, footer, locale }: Props) {
   const params = useParams();
   const currentLocale = (params?.locale as Locale) || (i18n.defaultLocale as Locale);
+  const currentPath = usePathname(); // Get current pathname using usePathname
 
   useEffect(() => {
 		const svgOpen = document.querySelector<SVGElement>("svg.open");
 		const svgClose = document.querySelector<SVGElement>("svg.close");
 		const menu = document.querySelector<HTMLElement>(".menu-click");
-		const menuItems = document.querySelectorAll<HTMLElement>(".menu-click ul li");
 		const formSubmitButton = document.querySelector<HTMLButtonElement>('form button[type="submit"]');
 
 		if (!svgOpen || !menu || !svgClose) return;
@@ -65,32 +65,6 @@ export function Navbar({ data, logo, footer, locale }: Props) {
 			closeHandler();
 		};
 
-		// Add click event to menu items
-		const handleMenuItemClick = (e: MouseEvent) => {
-			const target = e.currentTarget as HTMLElement;
-
-			// Check if the <li> contains a submenu
-			const submenu = target.querySelector(".submenu");
-			if (submenu) {
-				// Toggle submenu visibility
-				submenu.classList.toggle("max-h-screen");
-				submenu.classList.toggle("max-h-0");
-				e.stopPropagation();
-				return;
-			}
-
-			// Check if the <li> contains an <a> tag
-			const link = target.querySelector("a");
-			if (link) {
-				// Close the menu if <a> is clicked
-				svgClose.dispatchEvent(new Event("click"));
-			}
-		};
-
-		menuItems.forEach((item) => {
-			item.addEventListener("click", handleMenuItemClick);
-		});
-
 		// Add click event to form submit button to trigger svg.close click
 		const handleFormSubmitClick = () => {
 			svgClose.dispatchEvent(new Event("click"));
@@ -107,11 +81,6 @@ export function Navbar({ data, logo, footer, locale }: Props) {
 			svgOpen.removeEventListener("click", openHandler);
 			svgClose.removeEventListener("click", closeHandler);
 			document.removeEventListener("click", onDocumentClick);
-
-			// Remove click events from menu items
-			menuItems.forEach((item) => {
-				item.removeEventListener("click", handleMenuItemClick);
-			});
 
 			// Remove click event from form submit button
 			if (formSubmitButton) {
@@ -194,18 +163,30 @@ export function Navbar({ data, logo, footer, locale }: Props) {
 					.filter(child => child.parent?.id === item.id) // Find child items
 					.sort((a, b) => a.order - b.order); // Sort children by order
 
+				// Check if the current page matches the item's URL or any of its children
+				const isActive =
+					item.url === currentPath || children.some(child => child.url === currentPath);
+
 				return (
 					<li
 						key={item.id}
 						className={`font-normal text-[30px] leading-[72px] text-secondary border-l-[10px] ${
-							children.length > 0 ? "border-transparent" : "border-[#D9BA92]"
+							isActive ? "border-[#D9BA92]" : "border-transparent"
 						}`}
 					>
 						{item.url ? (
-							<Link href={item.url} className="pl-[10px] sm:pl-[30px] md:pl-[90px]">
-								{item.title}
-							</Link>
-						) : (
+	<Link
+		href={item.url}
+		className={`pl-[10px] sm:pl-[30px] md:pl-[90px] ${item.url === currentPath ? "text-[#CCAB80]" : ""}`}
+		onClick={(e) => {
+			e.stopPropagation(); // Ngăn sự kiện lan lên <li>
+			const svgClose = document.querySelector<SVGElement>("svg.close");
+			if (svgClose) svgClose.dispatchEvent(new Event("click"));
+		}}
+	>
+		{item.title}
+	</Link>
+) : (
 							<div
 								className="flex items-center gap-3 pl-[10px] sm:pl-[30px] md:pl-[90px] cursor-pointer"
 								onClick={() => toggleSubmenu(item.id)}
@@ -218,7 +199,7 @@ export function Navbar({ data, logo, footer, locale }: Props) {
 									fill="none"
 									xmlns="http://www.w3.org/2000/svg"
 									className={`transition-transform duration-300 ${
-										openSubmenus[item.id] ? "rotate-180" : ""
+										openSubmenus[item.id] ? "" : ""
 									}`}
 								>
 									<path
@@ -234,22 +215,39 @@ export function Navbar({ data, logo, footer, locale }: Props) {
 									openSubmenus[item.id] ? "max-h-screen" : "max-h-0"
 								}`}
 							>
-								{children.map(child => (
-									<li key={child.id}>
-										<Link href={child.url || "#"} className="text-lg flex items-center">
-											{child.icon?.url && (
-												<Image
-													className="mr-4"
-													alt={child.icon.alternativeText || ""}
-													src={strapiImage(child.icon.url)}
-													width={24}
-													height={24}
-												/>
-											)}
-											{child.title}
-										</Link>
-									</li>
-								))}
+								{children.map(child => {
+									const isChildActive = child.url === currentPath;
+
+									return (
+										<li
+											key={child.id}
+											className={`text-lg flex items-center ${
+												isChildActive ? "border-[#D9BA92]" : "border-transparent"
+											}`}
+										>
+											<Link
+												href={child.url || "#"}
+												className={`${isChildActive ? "text-[#CCAB80] flex" : "flex"}`}
+												onClick={(e) => {
+													e.stopPropagation(); // Ngăn sự kiện lan lên <li>
+													const svgClose = document.querySelector<SVGElement>("svg.close");
+													if (svgClose) svgClose.dispatchEvent(new Event("click"));
+												}}
+											>
+												{child.icon?.url && (
+													<Image
+														className="mr-4"
+														alt={child.icon.alternativeText || ""}
+														src={strapiImage(child.icon.url)}
+														width={24}
+														height={24}
+													/>
+												)}
+												{child.title}
+											</Link>
+										</li>
+									);
+								})}
 							</ul>
 						)}
 					</li>

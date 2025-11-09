@@ -36,8 +36,7 @@ export default async function HomePage({ params }: { params: { locale: string } 
       filters: {
         slug: "homepage",
         locale: params.locale,
-      },
-      populate: '*'
+      }
     },
     true
   );

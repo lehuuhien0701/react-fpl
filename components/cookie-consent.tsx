@@ -34,23 +34,50 @@ export const CookieConsent = ({ translations }: CookieConsentProps) => {
   if (!showConsent) return null;
 
   return (
-    <div className="fixed bottom-10 w-[370px] left-1/2 md:left-10 transform -translate-x-1/2 md:transform-none bg-secondary rounded-[10px] z-50 p-[30px] md:p-6 shadow-lg">
-      <div className="flex flex-col items-center justify-between gap-10">
+    <div
+      role="dialog"
+      aria-label={translations.title || "Cookie consent"}
+      className="fixed bottom-8 right-8 z-50 max-w-[400px] -translate-x-1/2 rounded-lg bg-white border border-gray-200 shadow-lg p-6"
+    >
+      <div className="">
         <div className="flex-1">
-          <h3 className="text-[34px] font-bold text-primary mb-2">
-            {translations.title}
+          <h3 className="text-2xl md:text-[28px] font-semibold text-[#2F324A] mb-4">
+            {translations.title || "Protection of your Privacy"}
           </h3>
-          <p className="text-sm leading-5 text-white">
-            {translations.description}
-          </p>
+
+          <div className="">
+            {/* If translations.description is plain text, show it first 
+            {translations.description && (
+              <p className="mb-4">{translations.description}</p>
+            )}
+              */}
+
+            {/* Bulleted purposes as in image */}
+            {translations.description && (
+            <div className='details-cookie'>
+              {translations.description}
+            </div>
+            )}
+            
+          </div>
         </div>
-        <div className="flex gap-6 w-full">
-          <a className="text-base w-full font-bold py-[10px] border border-primary text-primary text-center rounded-[40px] cursor-pointer" onClick={declineCookies}>
-            {translations.decline}
-          </a>
-          <a className="text-base w-full font-bold py-[10px] bg-primary text-black text-center rounded-[40px] cursor-pointer" onClick={acceptCookies}>
-            {translations.accept}
-          </a>
+
+        <div className="flex flex-col md:items-end md:justify-between min-w-[220px]">
+          <div className="flex gap-4 mt-2 md:mt-0 w-full">
+            <button
+              onClick={declineCookies}
+              className="w-full md:[50%] px-6 py-[8px]  border border-[#2F324A] text-[#2F324A] bg-white hover:bg-gray-50 transition"
+            >
+              {translations.decline || "Refuse"}
+            </button>
+
+            <button
+              onClick={acceptCookies}
+              className="w-full md:w-[50%] px-6 py-[8px]  bg-[#2F324A] text-white shadow-sm hover:opacity-95 transition"
+            >
+              {translations.accept || "Accept All"}
+            </button>
+          </div>
         </div>
       </div>
     </div>

@@ -67,9 +67,15 @@ body {
 .language-mobile a {
   @apply opacity-100
 }
-
-
-
+.details-cookie ul {
+  @apply list-disc pl-5 space-y-2 mb-4 text-sm md:text-base text-[#2F324A] leading-6;
+}
+.details-cookie p {
+  @apply text-sm text-[#6B7280];
+} 
+.details-cookie div p {
+  @apply text-sm md:text-base text-[#2F324A] leading-6
+}
 @layer components {
   .custom-radio-button::before {
     content: '';

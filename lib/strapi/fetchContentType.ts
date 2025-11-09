@@ -38,6 +38,8 @@ export default async function fetchContentType(
 
     const queryParams = { ...params };
 
+    //console.log('FetchContentTypeParams', queryParams );
+
     if (isEnabled) {
       queryParams.status = "draft";
     }

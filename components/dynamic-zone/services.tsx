@@ -120,12 +120,6 @@ export const Services = ({
     return <div className="text-center py-10 text-gray-400">No service details found.</div>;
   }
 
-  // helper: pick media field from item (supports icon / image ...)
-  const getMediaField = (obj: any) => {
-  if (!obj) return null;
-  // Ưu tiên các tên trường media
-  return obj.icon ?? obj.image ?? obj.media ?? obj.Icon ?? obj.Image ?? obj.Media ?? null;
-};
 
 // helper: extract url from common Strapi media shapes
 const extractMediaUrl = (media: any) => {

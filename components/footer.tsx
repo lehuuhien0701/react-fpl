@@ -6,6 +6,7 @@ import { HtmlParser } from "./html-parser";
 import { strapiImage } from "@/lib/strapi/strapiImage";
 import { usePathname } from "next/navigation";  
 import { BookingForm } from "./booking-form";
+import Link from "next/link";
 
 export const Footer = ({ data, locale }: { data: any, locale: string }) => {
   const pathname = usePathname(); // Get the current URL path
@@ -16,7 +17,11 @@ export const Footer = ({ data, locale }: { data: any, locale: string }) => {
     return null;
   }
 
-  const copyright = data?.copyright ?? "Copyright © Fiduciaire Premier Luxembourg S.A. 2025 | All rights reserved | Privacy Policy  | Cookie Policy";
+  const copyright = data?.copyright ?? "Copyright © Fiduciaire Premier Luxembourg S.A. 2025 | All rights reserved |";
+  const privacy_policy_text = data?.privacy_policy_text ?? "Privacy Policy";
+  const privacy_policy_link = data?.privacy_policy_link ?? "/privacy-policy";
+  const cookie_policy_text = data?.cookie_policy_text ?? "Cookie Policy";
+  const cookie_policy_link = data?.cookie_policy_link ?? "/cookie-policy";
   const designed_developed_by = data?.designed_developed_by ?? "Designed By";
 
   return (
@@ -94,7 +99,16 @@ export const Footer = ({ data, locale }: { data: any, locale: string }) => {
         <div className="max-w-[1400px] mx-auto w-full pt-0 py-20">
           <div className="xl:flex items-center text-[#CDCCD8] justify-between">
             <div className='text-center xl:text-left'>
-							<p>{parse(copyright)} </p>
+							<p>
+                {parse(copyright)}{" "}
+                <Link href={privacy_policy_link} className="cursor-pointer">
+                  {privacy_policy_text}
+                </Link>{" "}
+                |{" "}
+                <Link href={cookie_policy_link} className="cursor-pointer">
+                  {cookie_policy_text}
+                </Link>
+              </p>
 						</div>
 						<div className='justify-center xl:justify-end flex items-center flex-wrap designed_developed_by'>
 							<p className='flex items-center'>{parse(designed_developed_by)}</p>

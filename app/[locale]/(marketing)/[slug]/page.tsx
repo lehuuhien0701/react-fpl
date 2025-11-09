@@ -33,8 +33,7 @@ export default async function Page({ params }: { params: { locale: string, slug:
       filters: {
         slug: params.slug,
         locale: params.locale,
-      },
-      populate: "*",
+      }
     },
     true,
   );
