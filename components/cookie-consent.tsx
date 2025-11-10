@@ -1,6 +1,7 @@
 "use client";
 import React, { useEffect, useState } from 'react';
 import Cookies from 'js-cookie';
+import parse from "html-react-parser"; 
 
 interface CookieConsentProps {
   translations: {
@@ -41,24 +42,17 @@ export const CookieConsent = ({ translations }: CookieConsentProps) => {
     >
       <div className="">
         <div className="flex-1">
-          <h3 className="text-2xl md:text-[28px] font-semibold text-[#2F324A] mb-4">
+          <h3 className="text-xl font-medium text-[#2F324A] mb-4">
             {translations.title || "Protection of your Privacy"}
           </h3>
 
           <div className="">
-            {/* If translations.description is plain text, show it first 
+            {/* Nếu translations.description là HTML, dùng html-react-parser để render */}
             {translations.description && (
-              <p className="mb-4">{translations.description}</p>
+              <div className='details-cookie'>
+                {parse(translations.description)}
+              </div>
             )}
-              */}
-
-            {/* Bulleted purposes as in image */}
-            {translations.description && (
-            <div className='details-cookie'>
-              {translations.description}
-            </div>
-            )}
-            
           </div>
         </div>
 
@@ -66,7 +60,7 @@ export const CookieConsent = ({ translations }: CookieConsentProps) => {
           <div className="flex gap-4 mt-2 md:mt-0 w-full">
             <button
               onClick={declineCookies}
-              className="w-full md:[50%] px-6 py-[8px]  border border-[#2F324A] text-[#2F324A] bg-white hover:bg-gray-50 transition"
+              className="w-full md:w-[50%] px-6 py-[8px]  border border-[#2F324A] text-[#2F324A] bg-white hover:bg-gray-50 transition"
             >
               {translations.decline || "Refuse"}
             </button>
