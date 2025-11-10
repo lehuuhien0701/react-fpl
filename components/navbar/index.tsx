@@ -23,6 +23,7 @@ export function Navbar({ data, logo, footer, locale }: Props) {
   const params = useParams();
   const currentLocale = (params?.locale as Locale) || (i18n.defaultLocale as Locale);
   const currentPath = usePathname(); // Get current pathname using usePathname
+  const href = locale === i18n.defaultLocale ? '/' : `/${locale || ''}`;
 
   useEffect(() => {
 		const svgOpen = document.querySelector<SVGElement>("svg.open");
@@ -261,7 +262,7 @@ export function Navbar({ data, logo, footer, locale }: Props) {
 				<nav className="bg-white border-b border-white/10 sticky top-0">
 					<div className="h-[88px] flex items-center justify-between">
 						<h1 className='font-merriweather font-bold text-base md:text-xl leading-6'>
-							<Link href="/" aria-label="Go to home" className="text-[#2F324A] hover:opacity-80 focus:outline-none focus:ring-2 focus:ring-[#CCAB80] flex items-center gap-2">
+							<Link href={href} aria-label="Go to home" className="text-[#2F324A] hover:opacity-80 focus:outline-none focus:ring-2 focus:ring-[#CCAB80] flex items-center gap-2">
 								{logo?.image?.url && (
 									<Image
 										src={strapiImage(logo.image.url)}
