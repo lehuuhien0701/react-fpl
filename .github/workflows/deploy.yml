@@ -18,7 +18,8 @@ jobs:
           script: |
             cd /home/projects/react-fiduciaire-premier
             git pull origin main
-            yarn install
-            yarn build
-            cp -r build/* /var/www/html/
+            docker-compose stop react-fiduciaire-premier
+            docker-compose rm -f react-fiduciaire-premier
+            docker-compose build react-fiduciaire-premier
+            docker-compose up -d react-fiduciaire-premier
             # Hoặc lệnh restart nginx, pm2, docker nếu cần
