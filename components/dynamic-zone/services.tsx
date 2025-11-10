@@ -164,7 +164,7 @@ const safeImageSrc = (media: any, fallback: string) => {
 
   return (
     <div className='pb-14 py-20 md:py-[100px] min-h-[900px] relative'>
-      <div className='max-w-[1400px] mx-auto w-full px-5 md:px-10 lg:px-20'>
+      <div className='max-w-[1400px] mx-auto w-full px-5 md:px-10 lg:px-20 z-50 relative'>
         <div className='max-w-[840px] m-auto relative z-[9]'>
           <div className='box-question'>
             {/* Lặp qua servicedetails (dynamic-zone.service-details) trực tiếp, không lồng qua question */}
