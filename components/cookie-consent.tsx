@@ -38,7 +38,7 @@ export const CookieConsent = ({ translations }: CookieConsentProps) => {
     <div
       role="dialog"
       aria-label={translations.title || "Cookie consent"}
-      className="fixed bottom-8 right-8 z-50 max-w-[400px] -translate-x-1/2 rounded-lg bg-white border border-gray-200 shadow-lg p-6"
+      className="fixed bottom-8 right-8 z-[999] max-w-[400px] -translate-x-1/2 rounded-lg bg-white border border-gray-200 shadow-lg p-6"
     >
       <div className="">
         <div className="flex-1">
