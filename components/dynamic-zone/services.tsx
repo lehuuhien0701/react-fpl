@@ -176,7 +176,7 @@ const safeImageSrc = (media: any, fallback: string) => {
                     <Image
                       className='mr-4'
                       alt={serviceObj.title || "Service Icon"}
-                      src={safeImageSrc(serviceObj.icon, "/icon1.svg")}
+                      src={safeImageSrc(serviceObj.icon, `/icon${idx + 1}.svg`)}
                       width={30}
                       height={30}
                       priority
