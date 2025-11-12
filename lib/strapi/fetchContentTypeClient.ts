@@ -23,6 +23,7 @@ export default async function fetchContentTypeClient(
     }
 
     const response = await fetch(url, { headers });
+    console.log('FetchContentTypeURL:', url);
 
     if (!response.ok) {
       const text = await response.text();

@@ -34,15 +34,15 @@ export default async function Page({ params }: { params: { locale: string, slug:
         slug: params.slug,
         locale: params.locale,
       },
-		populate: {
-		  dynamic_zone: {
-			populate: "*"
-		  }
-		}
+      populate: {
+        localizations: { populate: "*" },
+        dynamic_zone: { populate: "*" }
+      }
     },
     true,
   );
 
+  //console.log("Page data fetched for slug:", pageData);
   const localizedSlugs = pageData?.localizations?.reduce(
     (acc: Record<string, string>, localization: any) => {
       acc[localization.locale] = localization.slug;

@@ -262,7 +262,7 @@ export const Blog = ({
                     const company = item.company ?? item.author ?? "Fiduciaire Premier Luxembourg S.A.";
                     const rawExcerpt = item.description ?? item.excerpt ?? item.summary ?? extractTextFromRichContent(item.content) ?? "";
                     const excerptText = String(rawExcerpt);
-                    const href = `/blog/${item.slug ?? item.slug_current ?? item.id}`;
+                    const href = locale === i18n.defaultLocale ? `/blog/${item.slug}` : `/${locale}/blog/${item.slug}`;
 
                     return (
                       <div key={item.id ?? href}>
@@ -326,7 +326,8 @@ export const Blog = ({
                       const company = item.company ?? item.author ?? "Fiduciaire Premier Luxembourg S.A.";
                       const rawExcerpt = item.description ?? item.excerpt ?? item.summary ?? extractTextFromRichContent(item.content) ?? "";
                       const excerptText = String(rawExcerpt);
-                      const href = `/blog/${item.slug ?? item.slug_current ?? item.id}`;
+                      const href = 
+                      locale === i18n.defaultLocale ? `/blog/${item.slug}` : `/${locale}/blog/${item.slug}`;
 
                       return (
                         <div key={item.id ?? href}>

@@ -37,11 +37,10 @@ export default async function HomePage({ params }: { params: { locale: string } 
         slug: "homepage",
         locale: params.locale,
       },
-		populate: {
-		  dynamic_zone: {
-			populate: "*"
-		  }
-		}
+		  populate: {
+        localizations: { populate: "*" },
+        dynamic_zone: { populate: "*" }
+      }
     },
     true
   );
