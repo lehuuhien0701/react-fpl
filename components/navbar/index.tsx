@@ -257,7 +257,7 @@ export function Navbar({ data, logo, footer, locale }: Props) {
 	}
 
   return (
-    <div className='wrap-header'>
+    <div className='wrap-header relative z-[9999]'>
 			<div className='max-w-[1400px] mx-auto w-full px-5 md:px-10 lg:px-20 relative z-10'>
 				<nav className="bg-white border-b border-white/10 sticky top-0">
 					<div className="h-[88px] flex items-center justify-between">

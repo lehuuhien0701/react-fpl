@@ -27,6 +27,8 @@ export function LocaleSwitcher({
     return null; // Return null to avoid rendering the component
   }
 
+  console.log("Current pathname:", i18n.locales, localizedSlugs);
+
   const segments = pathname.split("/"); // Split path into segments
 
   // Generate localized path for each locale
