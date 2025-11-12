@@ -14,7 +14,6 @@ export const Hero = ({
   background:any[];
 }) => {
 
-  console.log("Hero background:", background);
   // helper to safely get strapi image url or fallback
   const safeImageSrc = (media: any, fallback: string) => {
     try {
@@ -109,7 +108,7 @@ export const Hero = ({
         height: '645px',
       }}
     >
-      <div className='absolute top-0 left-0 right-0 bottom-0 mix-blend-multiply bg-[linear-gradient(0deg,rgba(0,0,0,0.3),rgba(0,0,0,0.3))] lg:bg-[linear-gradient(270deg,rgba(26,27,30,0)_65.39%,#1A1B1E_100%)]'></div>
+      <div className='absolute top-0 left-0 right-0 bottom-0 mix-blend-multiply bg-[linear-gradient(0deg,rgba(0,0,0,0.3),rgba(0,0,0,0.3))] lg:bg-[linear-gradient(270deg,rgba(26,27,30,0)_35.39%,#1A1B1E_100%)]'></div>
       <div className='max-w-[1400px] mx-auto w-full px-10 lg:px-20 relative z-10'>
         <div className='lg:max-w-[560px]'>
           {heading && (
