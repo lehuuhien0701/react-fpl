@@ -31,19 +31,33 @@ export async function generateMetadata({
 export default async function HomePage({ params }: { params: { locale: string } }) {
 
   const pageData = await fetchContentType(
-    'pages',
-    {
-      filters: {
-        slug: "homepage",
-        locale: params.locale,
-      },
-		  populate: {
-        localizations: { populate: "*" },
-        dynamic_zone: { populate: "*" }
-      }
+  'pages',
+  {
+    filters: {
+      slug: "homepage",
+      locale: params.locale,
     },
-    true
-  );
+    populate: {
+      localizations: { populate: "*" },
+      dynamic_zone: {
+        on: {
+          "dynamic-zone.question": {
+            populate: {
+              servicedetails: {
+                populate: ["icon"], // chỉ rõ cần populate trường icon (image)
+              },
+            },
+          },
+          // Các component khác trong dynamic_zone nếu cần
+          "dynamic-zone.hero": { populate: "*" },
+          "dynamic-zone.practice-areas": { populate: "*" },
+          "dynamic-zone.blog": { populate: "*" },
+        },
+      },
+    },
+  },
+  true
+);
 
   const localizedSlugs = pageData?.localizations?.reduce(
     (acc: Record<string, string>, localization: any) => {
