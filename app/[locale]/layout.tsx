@@ -59,7 +59,6 @@ export default async function LocaleLayout({
         filters: { locale: currentLocale },
         populate: '*'
     }, true);
-
     // Fetch menu data from Strapi collection-type "menu"
     const menuData = await fetchContentTypeClient('menus', {
         filters: { locale: currentLocale },

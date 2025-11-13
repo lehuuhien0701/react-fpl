@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState } from 'react';
-import { Button } from "@/components/elements/button";
 import { translations } from '@/translations/common';
 import { useParams, useRouter } from 'next/navigation';
 import { i18n } from "@/i18n.config";
@@ -106,7 +105,9 @@ export const BookingForm = ({
   const phoneLabel = data?.phone_label || "Phone";
   const messageLabel = data?.message_label || "Message";
   const accentPrimary = data?.accent_primary;
-  const submitLabel = data?.submit_label || "Submit";
+  const submitLabel = translations[currentLocale]?.submit || translations[i18n.defaultLocale].submit;
+
+  //console.log("Rendering BookingForm:", data);
 
   return (
     <form onSubmit={handleSubmit} className={`w-full space-y-5 ${className || ''}`}>

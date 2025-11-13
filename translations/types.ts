@@ -6,6 +6,7 @@ export type TranslationKeys = {
   read_more: string;
   menu: string;
   message: string;
+  submit: string;
 };
 
 export type Translations = {
