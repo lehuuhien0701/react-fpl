@@ -5,6 +5,7 @@ export type TranslationKeys = {
   next: string;
   read_more: string;
   menu: string;
+  message: string;
 };
 
 export type Translations = {

@@ -169,7 +169,7 @@ export const BookingForm = ({
         <textarea
           id="message"
           className="text-base text-white w-full h-40 p-2 outline-none focus:border-navy focus:ring-navy transition duration-200 bg-transparent border border-[#CDCCD8]"
-          placeholder="Your message"
+          placeholder={translations[currentLocale]?.message || translations[i18n.defaultLocale].message}
           value={formData.message}
           onChange={e => handleInputChange('message', e.target.value)}
         />
