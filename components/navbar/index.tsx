@@ -280,10 +280,10 @@ export function Navbar({ data, logo, footer, locale }: Props) {
 						<div className="flex items-center gap-10">
 							<div className='flex items-center'>
 								
-								<div className="hidden sm:block">
+								<div className="block">
 									<LocaleSwitcher currentLocale={locale} />
 								</div>
-								<div className='flex items-center border-l border-[#E5E7EB] ml-5 md:ml-10 pl-5 md:pl-10'>
+								<div className='flex items-center md:border-l border-[#E5E7EB] ml-2 md:ml-10 pl-2 md:pl-10'>
 									<svg className='open cursor-pointer' width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
 										<rect x="15.1602" y="30.2928" width="20.9723" height="3.22651" rx="1.61326" fill="#CCAB80"/>
 										<rect x="23.2265" y="21.4199" width="12.9061" height="3.22651" rx="1.61326" fill="#CCAB80"/>
