@@ -111,7 +111,7 @@ export const Footer = ({ data, locale }: { data: any, locale: string }) => {
               </p>
 						</div>
 						<div className='justify-center xl:justify-end flex items-center flex-wrap designed_developed_by'>
-							<p className='flex items-center whitespace-nowrap [&_img]:min-w-[42px]'>{parse(designed_developed_by)}</p>
+							<p className='flex items-center md:whitespace-nowrap [&_span]:text-center md:[&_span]:text-left [&_img]:min-w-[42px] [&_img]:inline-block [&_img]:align-baseline [&_img]:mr-1'>{parse(designed_developed_by)}</p>
 						</div>
           </div>
         </div> 

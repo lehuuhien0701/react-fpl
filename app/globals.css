@@ -55,9 +55,6 @@ body {
   background-color: var(--tw-prose-bullets, theme('colors.primary')); 
 }
 
-.designed_developed_by span:first-child {
-  @apply flex items-center gap-2 mr-2 w-48 md:w-auto;
-}
 .custom-h2 h2 {
   @apply text-base leading-6 text-secondary font-semibold mb-2;  
 }
