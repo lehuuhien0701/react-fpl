@@ -24,7 +24,7 @@ export async function BlogLayout({
   const protocol = process.env.NODE_ENV === "production" ? "https" : "http";
   const shareUrl = `${protocol}://${domain}${
     locale === i18n.defaultLocale ? "" : `/${locale}`
-  }/news/${article.slug}`;
+  }/blog/${article.slug}`;
 
   const globalData = await fetchContentType(
     "global",
@@ -117,7 +117,9 @@ export async function BlogLayout({
             children chứa nội dung đã được parse/hoạt động (HtmlParser) từ trang single.
             Nếu bạn muốn dùng HtmlParser tại đây thay vì truyền children, thay {children} bằng <HtmlParser html={article.content} />.
           */}
+          <div className="[&_h2]:text-2xl [&_h2]:mt-10 [&_h2]:mb-4 [&_h2]:font-semibold [&_h3]:text-xl [&_h3]:mt-8 [&_h3]:mb-4 [&_h3]:font-semibold [&_ul]:list-disc [&_ul]:pl-6 [&_ol]:list-decimal [&_ol]:pl-6 [&_a]:text-primary [&_a]:underline [&_img]:my-6">
           {children}
+          </div>
 
           <div className='mt-4'>
               <p className='text-center'>{globalData?.Articles?.share_label ?? "Share this post"}</p>
