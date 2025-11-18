@@ -1,24 +1,25 @@
-import { Container } from "./container"; 
 import Image from "next/image";
-import { Link } from "next-view-transitions";
 import { strapiImage } from "@/lib/strapi/strapiImage";
 import { Article } from "@/types/types";
 import fetchContentType from "@/lib/strapi/fetchContentType";
-import { HtmlParser } from "./html-parser";
 import { headers } from "next/headers";
 import { i18n } from "@/i18n.config";
-import { BlogCard, BlogCardSmall } from "@/components/blog-card";
-import { Button } from "./elements/button";
+
+import { translations } from '@/translations/common';
+import { Locale } from '@/translations/types';
 
 export async function BlogLayout({ 
   article,
   locale,
+  currentLocale,
   children,
 }: {
   article: Article;
   locale: string;
+  currentLocale: Locale;
   children: React.ReactNode;
 }) {
+  
   const headersList = headers();
   const domain = headersList.get("host") || "";
   const protocol = process.env.NODE_ENV === "production" ? "https" : "http";
@@ -26,39 +27,6 @@ export async function BlogLayout({
     locale === i18n.defaultLocale ? "" : `/${locale}`
   }/blog/${article.slug}`;
 
-  const globalData = await fetchContentType(
-    "global",
-    {
-      filters: { locale },
-      populate: "*",
-    },
-    true
-  );
-
-  const relatedArticles = await fetchContentType(
-    "articles",
-    {
-      filters: {
-        locale,
-        id: { $ne: article.id }, // exclude current article
-        categories: {
-          id: { $in: article.categories?.map((cat: any) => cat.id) || [] },
-        },
-      },
-      pagination: {
-        limit: 5,
-      },
-      populate: "*",
-    },
-    false
-  );
-
-  const featuredPost = relatedArticles?.data?.[0];
-  const otherPosts = relatedArticles?.data?.slice(1, 5);
-
-  const isInternalLink = (link: string) => {
-    return link.startsWith('/') || link.startsWith('#');
-  };
 
   // normalize published date and company/author fields from various shapes
   const normalizePublished = (a: any) => {
@@ -122,7 +90,7 @@ export async function BlogLayout({
           </div>
 
           <div className='mt-4'>
-              <p className='text-center'>{globalData?.Articles?.share_label ?? "Share this post"}</p>
+              <p className='text-center'>{(translations as any)[currentLocale]?.share_label || (translations as any)[i18n.defaultLocale]?.share_label || "Share this post"} </p>
               <div className='flex justify-center gap-6'>
                   <div className="flex items-center gap-4">
                     <a

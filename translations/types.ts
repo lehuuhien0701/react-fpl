@@ -7,6 +7,7 @@ export type TranslationKeys = {
   menu: string;
   message: string;
   submit: string;
+  share_label: string;
 };
 
 export type Translations = {

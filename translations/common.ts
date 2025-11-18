@@ -7,7 +7,8 @@ export const translations: Translations = {
     menu: "Menu",
     read_more: "Read more",
     message: "Your message",
-    submit: "Submit"
+    submit: "Submit",
+    share_label: "Share this post"
   },
   fr: {
     previous: "Précédent",
@@ -15,7 +16,8 @@ export const translations: Translations = {
     menu: "Menu",
     read_more: "Lire la suite",
     message: "Votre message",
-    submit: "Soumettre"
+    submit: "Soumettre",
+    share_label: "Partager cet article"
   },
   de: {
     previous: "Zurück",
@@ -23,6 +25,7 @@ export const translations: Translations = {
     menu: "Menü",
     read_more: "Weiterlesen",
     message: "Ihre Nachricht",
-    submit: "Einreichen"
+    submit: "Einreichen",
+    share_label: "Diesen Beitrag teilen"
   }
 };
