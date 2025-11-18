@@ -1,22 +1,17 @@
-import Image from "next/image";
 import { strapiImage } from "@/lib/strapi/strapiImage";
 import { Article } from "@/types/types";
-import fetchContentType from "@/lib/strapi/fetchContentType";
 import { headers } from "next/headers";
 import { i18n } from "@/i18n.config";
 
 import { translations } from '@/translations/common';
-import { Locale } from '@/translations/types';
 
 export async function BlogLayout({ 
   article,
   locale,
-  currentLocale,
   children,
 }: {
   article: Article;
   locale: string;
-  currentLocale: Locale;
   children: React.ReactNode;
 }) {
   
@@ -70,13 +65,12 @@ export async function BlogLayout({
         </div>
 
         <div className='max-w-[1400px] mx-auto w-full px-5 md:px-10 lg:px-20 mb-16'>
-          <Image
+          <img
             className='w-full'
             alt={article.title}
             src={article.image ? (strapiImage(article.image.url) ?? "/thumbnail04.jpg") : "/thumbnail04.jpg"}
             width={1400}
             height={600}
-            priority={false}
           />
         </div>
 
@@ -90,7 +84,7 @@ export async function BlogLayout({
           </div>
 
           <div className='mt-4'>
-              <p className='text-center'>{(translations as any)[currentLocale]?.share_label || (translations as any)[i18n.defaultLocale]?.share_label || "Share this post"} </p>
+              <p className='text-center'>{(translations as any)[locale]?.share_label || (translations as any)[i18n.defaultLocale]?.share_label || "Share this post"} </p>
               <div className='flex justify-center gap-6'>
                   <div className="flex items-center gap-4">
                     <a
@@ -117,7 +111,7 @@ export async function BlogLayout({
                     >
                       <svg width="40" height="40" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M7.31753 14.7093H5.29504V8.42092H7.31753V14.7093ZM6.37624 7.46482H6.36175C5.71448 7.46482 5.29536 6.98299 5.29536 6.37984C5.29536 5.76565 5.72551 5.29517 6.38727 5.29517C7.04904 5.29517 7.45398 5.76219 7.46848 6.37984C7.46816 6.98299 7.04904 7.46482 6.37624 7.46482ZM14.7092 14.7093H12.6867V11.2709C12.6867 10.4472 12.3923 9.88437 11.6606 9.88437C11.1016 9.88437 10.7707 10.2625 10.6235 10.6309C10.5684 10.7633 10.5536 10.9435 10.5536 11.1275V14.7093H8.53108V8.42092H10.5536V9.29603C10.8479 8.87691 11.3077 8.27375 12.3775 8.27375C13.7052 8.27375 14.7095 9.14886 14.7095 11.0355L14.7092 14.7093Z" fill="#2F324A"/>
-                      <path d="M2.08319 9.99992C2.08319 6.26797 2.08319 4.40199 3.24256 3.24262C4.40193 2.08325 6.26791 2.08325 9.99986 2.08325C13.7318 2.08325 15.5978 2.08325 16.7572 3.24262C17.9165 4.40199 17.9165 6.26797 17.9165 9.99992C17.9165 13.7318 17.9165 15.5978 16.7572 16.7573C15.5978 17.9166 13.7318 17.9166 9.99986 17.9166C6.26791 17.9166 4.40193 17.9166 3.24256 16.7573C2.08319 15.5978 2.08319 13.7318 2.08319 9.99992Z" stroke="#2F324A" stroke-linejoin="round"/>
+                      <path d="M2.08319 9.99992C2.08319 6.26797 2.08319 4.40199 3.24256 3.24262C4.40193 2.08325 6.26791 2.08325 9.99986 2.08325C13.7318 2.08325 15.5978 2.08325 16.7572 3.24262C17.9165 4.40199 17.9165 6.26797 17.9165 9.99992C17.9165 13.7318 17.9165 15.5978 16.7572 16.7573C15.5978 17.9166 13.7318 17.9166 9.99986 17.9166C6.26791 17.9166 4.40193 17.9166 3.24256 16.7573C2.08319 15.5978 2.08319 13.7318 2.08319 9.99992Z" stroke="#2F324A" strokeLinejoin="round"/>
                       </svg>
 
                     </a>

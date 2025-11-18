@@ -27,13 +27,15 @@ export default async function SingleArticlePage({
 }: {
   params: { slug: string; locale: string };
 }) {
+
   const article = await fetchContentType(
     "articles",
     {
       filters: {
         slug: params.slug,
         locale: params.locale,
-      }
+      },
+      populate: 'image',
     },
     true,
   );
