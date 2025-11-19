@@ -110,7 +110,7 @@ export const Hero = ({
     >
       <div className='absolute top-0 left-0 right-0 bottom-0 mix-blend-multiply bg-[linear-gradient(0deg,rgba(0,0,0,0.3),rgba(0,0,0,0.3))] lg:bg-[linear-gradient(270deg,rgba(26,27,30,0)_35.39%,#1A1B1E_100%)]'></div>
       <div className='max-w-[1400px] mx-auto w-full px-10 lg:px-20 relative z-10'>
-        <div className='lg:max-w-[560px]'>
+        <div className='lg:max-w-[60%]'>
           {heading && (
             <h1 className='text-center lg:text-left mt-9 mb-[70px] font-medium text-[50px] leading-[50px] md:text-[70px] md:leading-[70px] text-white'>
               {heading ? parse(heading) : null}

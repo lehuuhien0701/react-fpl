@@ -29,6 +29,7 @@ export function Navbar({ data, logo, footer, locale }: Props) {
 		const svgOpen = document.querySelector<SVGElement>("svg.open");
 		const svgClose = document.querySelector<SVGElement>("svg.close");
 		const menu = document.querySelector<HTMLElement>(".menu-click");
+		const menuText = document.querySelector<HTMLElement>(".menu-text"); // thêm dòng này
 		const formSubmitButton = document.querySelector<HTMLButtonElement>('form button[type="submit"]');
 
 		if (!svgOpen || !menu || !svgClose) return;
@@ -62,6 +63,7 @@ export function Navbar({ data, logo, footer, locale }: Props) {
 			if (!target) return;
 			if (menu.contains(target)) return;
 			if (svgOpen.contains(target)) return;
+			if (menuText && menuText.contains(target)) return;
 			if (svgClose && svgClose.contains(target)) return;
 			closeHandler();
 		};
@@ -75,11 +77,13 @@ export function Navbar({ data, logo, footer, locale }: Props) {
 		}
 
 		svgOpen.addEventListener("click", openHandler);
+		if (menuText) menuText.addEventListener("click", openHandler);
 		svgClose.addEventListener("click", closeHandler);
 		document.addEventListener("click", onDocumentClick);
 
 		return () => {
 			svgOpen.removeEventListener("click", openHandler);
+			if (menuText) menuText.removeEventListener("click", openHandler); // thêm dòng này
 			svgClose.removeEventListener("click", closeHandler);
 			document.removeEventListener("click", onDocumentClick);
 
@@ -290,7 +294,7 @@ export function Navbar({ data, logo, footer, locale }: Props) {
 										<rect x="3.86743" y="13.3536" width="32.2651" height="3.22651" rx="1.61326" fill="#CCAB80"/>
 										<rect x="15.1602" y="4.48069" width="20.9723" height="3.22651" rx="1.61326" fill="#CCAB80"/>
 									</svg>
-									<span className='font-inter font-bold text-base leading-6 text-[#CCAB80] ml-[10px]'>
+									<span className='font-inter cursor-pointer font-bold text-base leading-6 text-[#CCAB80] ml-[10px] menu-text hidden md:block'>
 										{(translations as any)[currentLocale]?.menu || (translations as any)[i18n.defaultLocale]?.menu || "Menu"} 
 									</span>
 								</div>
