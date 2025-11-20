@@ -61,7 +61,7 @@ export async function BlogLayout({
 
         <div className='max-w-[1400px] mx-auto w-full px-5 md:px-10 lg:px-20 mb-16'>
           <img
-            className='w-full'
+            className='w-full max-h-[500px] object-cover'
             alt={article.title}
             src={article.image ? (strapiImage(article.image.url) ?? "/thumbnail04.jpg") : "/thumbnail04.jpg"}
             width={1400}
