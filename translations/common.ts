@@ -8,7 +8,8 @@ export const translations: Translations = {
     read_more: "Read more",
     message: "Your message",
     submit: "Submit",
-    share_label: "Share this post"
+    share_label: "Share this post",
+    other_articles_label: "Other articles"
   },
   fr: {
     previous: "Précédent",
@@ -17,7 +18,8 @@ export const translations: Translations = {
     read_more: "Lire la suite",
     message: "Votre message",
     submit: "Soumettre",
-    share_label: "Partager cet article"
+    share_label: "Partager cet article",
+    other_articles_label: "Autres articles"
   },
   de: {
     previous: "Zurück",
@@ -26,6 +28,7 @@ export const translations: Translations = {
     read_more: "Weiterlesen",
     message: "Ihre Nachricht",
     submit: "Einreichen",
-    share_label: "Diesen Beitrag teilen"
+    share_label: "Diesen Beitrag teilen", 
+    other_articles_label: "Andere Artikel"
   }
 };

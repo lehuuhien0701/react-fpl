@@ -8,6 +8,7 @@ export type TranslationKeys = {
   message: string;
   submit: string;
   share_label: string;
+  other_articles_label: string;
 };
 
 export type Translations = {

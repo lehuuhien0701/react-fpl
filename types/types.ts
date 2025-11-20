@@ -14,6 +14,7 @@ export interface Article {
   slug: string;
   content: string;
   dynamic_zone: any[];
+  company?: string;
   createdAt: string;
   updatedAt: string;
   publishedAt: string;
