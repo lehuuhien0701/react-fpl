@@ -20,7 +20,9 @@ export const translations: Translations = {
     last_name_label: "Last Name",
     email_label: "Email",
     phone_label: "Phone",
-    message_label: "Message"
+    message_label: "Message",
+    field_required: "This field is required",
+    invalid_email: "Invalid email format"
   },
   fr: {
     previous: "Précédent",
@@ -41,7 +43,9 @@ export const translations: Translations = {
     last_name_label: "Prénom",
     email_label: "Email",
     phone_label: "Téléphone",
-    message_label: "Message"
+    message_label: "Message",
+    field_required: "Ce champ est obligatoire",
+    invalid_email: "Format d'email invalide"
   },
   de: {
     previous: "Zurück",
@@ -62,6 +66,8 @@ export const translations: Translations = {
     last_name_label: "Nachname",
     email_label: "E-Mail",
     phone_label: "Telefon",
-    message_label: "Nachricht"
+    message_label: "Nachricht",
+    field_required: "Dieses Feld ist erforderlich",
+    invalid_email: "Ungültiges E-Mail-Format"
   }
 };

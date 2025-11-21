@@ -1,13 +1,17 @@
 import React from "react";
+import Link from "next/link";
+import { i18n } from "@/i18n.config";
 
 export const ThankYouPage = ({
   title,
   message,
   button_text,
+  locale,
 }: {
   title?: string;
   message?: string;
   button_text?: string;
+  locale?: string;
 }) => {
   return (
     <>
@@ -15,12 +19,17 @@ export const ThankYouPage = ({
             <div className='max-w-[1400px] mx-auto w-full px-5 md:px-10 lg:px-20'>
                 <div className='max-w-[840px] m-auto relative z-[9999]'>
                     <div className='box-question text-center'>
-                            <h1 className="italic-normal font-medium text-[70px] leading-[70px] text-secondary mb-6">{title || "Thank you !"}</h1>
-                            <p className="italic-normal font-normal text-sm text-center leading-[26px] text-[#CDCCD8] mb-14">
-                                {message || "We have received your message and we will contact you soon !"}
-                            </p>
-                            
-                            <a href="/" className="inline-block leading-[44px] w-full sm:w-auto text-sm font-medium text-primary bg-secondary h-11 px-10 hover:bg-white transition duration-200">{button_text || "Back to home"}</a>
+                        <h1 className="italic-normal font-medium text-[70px] leading-[70px] text-secondary mb-6">{title || "Thank you !"}</h1>
+                        <p className="italic-normal font-normal text-sm text-center leading-[26px] text-[#CDCCD8] mb-14">
+                            {message || "We have received your message and we will contact you soon !"}
+                        </p>
+                        
+                        <Link
+                          href={locale === i18n.defaultLocale ? "/" : `/${locale}`}
+                          className="inline-block leading-[44px] w-full sm:w-auto text-sm font-medium text-primary bg-secondary h-11 px-10 hover:bg-white transition duration-200"
+                        >
+                          {button_text || "Back to home"}
+                        </Link>
                     </div>
                 </div>
                 <div className=''>

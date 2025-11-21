@@ -33,11 +33,16 @@ export default async function SingleArticlePage({
     {
       filters: {
         slug: params.slug,
-        locale: params.locale,
       },
-      populate: 'image',
+      locale: params.locale,
+      populate: {
+        image: true,
+        localizations: {
+          populate: "*",
+        },
+      },
     },
-    true,
+    true
   );
 
   if (!article) {

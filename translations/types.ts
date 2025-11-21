@@ -20,6 +20,8 @@ export type TranslationKeys = {
   email_label: string;
   phone_label: string;
   message_label: string;
+  field_required: string;
+  invalid_email: string;
 };
 
 export type Translations = {

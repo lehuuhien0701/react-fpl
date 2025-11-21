@@ -71,7 +71,7 @@ export const Hero = ({
         <div className='max-w-[1400px] mx-auto w-full px-10 lg:px-20 relative z-10'>
           <div className='lg:max-w-[560px]'>
             {heading && (
-              <h1 className='text-center lg:text-left mt-9 mb-[70px] font-medium text-[50px] leading-[50px] md:text-[70px] md:leading-[70px] text-white'>
+              <h1 className='text-center lg:text-left mt-9 mb-[70px] font-medium text-[35px] leading-[50px] md:text-[70px] md:leading-[70px] text-white'>
                 {heading ? parse(heading) : null}
               </h1>
             )}
@@ -112,7 +112,7 @@ export const Hero = ({
       <div className='max-w-[1400px] mx-auto w-full px-10 lg:px-20 relative z-10'>
         <div className='lg:max-w-[60%]'>
           {heading && (
-            <h1 className='text-center lg:text-left mt-9 mb-[70px] font-medium text-[50px] leading-[50px] md:text-[70px] md:leading-[70px] text-white'>
+            <h1 className='text-center lg:text-left mt-9 mb-[70px] font-medium text-[35px] leading-[50px] md:text-[70px] md:leading-[70px] text-white'>
               {heading ? parse(heading) : null}
             </h1>
           )}

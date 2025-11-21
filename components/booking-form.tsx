@@ -31,17 +31,17 @@ export const BookingForm = ({
     const newErrors: {[key: string]: string} = {};
     
     if (!formData.name.trim()) {
-      newErrors.name = data.form_message?.required_fields || 'This field is required';
+      newErrors.name = translations[currentLocale]?.field_required || translations[i18n.defaultLocale].field_required;
     }
     
     if (!formData.email.trim()) {
-      newErrors.email = data.form_message?.required_fields || 'This field is required';
+      newErrors.email = translations[currentLocale]?.field_required || translations[i18n.defaultLocale].field_required;
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      newErrors.email = data.form_message?.invalid_email || 'Invalid email format';
+      newErrors.email = translations[currentLocale]?.invalid_email || translations[i18n.defaultLocale].invalid_email;
     }
     
     if (!formData.phone.trim()) {
-      newErrors.phone = data.form_message?.required_fields || 'This field is required';
+      newErrors.phone = translations[currentLocale]?.field_required || translations[i18n.defaultLocale].field_required;
     }
   
 

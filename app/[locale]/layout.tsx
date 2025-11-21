@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Metadata } from 'next';
-import { Inter, Barlow } from 'next/font/google';
+import { Inter, Barlow, Merriweather } from 'next/font/google';
 import { generateMetadataObject } from '@/lib/shared/metadata';
 
 import { Footer } from '@/components/footer';
@@ -25,6 +25,12 @@ const barlow = Barlow({
     subsets: ["latin"],
     display: "swap",
     weight: ["400", "500", "600", "700", "800", "900"],
+});
+
+const merriweather = Merriweather({
+    subsets: ["latin"],
+    display: "swap",
+    weight: ["700"],
 });
 
 export async function generateMetadata({

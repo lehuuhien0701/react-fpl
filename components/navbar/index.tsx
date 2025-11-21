@@ -276,7 +276,7 @@ export function Navbar({ data, logo, footer, locale }: Props) {
 										className="inline-block"
 									/>
 								)}
-								<span>
+								<span className="max-w-[180px] sm:max-w-none font-serif">
 									{logo?.logo_text || "Fiduciaire Premier Luxembourg S.A."}
 								</span>
 							</Link>
