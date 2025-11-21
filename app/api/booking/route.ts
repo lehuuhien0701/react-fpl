@@ -42,9 +42,7 @@ export async function POST(request: Request) {
     // HTML cho email người dùng
     const userEmailHtml = `
     <div style="font-family: Arial, sans-serif; color: #333; padding: 20px; border-radius: 8px;">
-      <div style="display: inline-block;">
-        <img src="${process.env.NEXT_PUBLIC_BASEURL}/${formData.emailType}-logo.png" alt="Logo" style="width: 200px;" />
-      </div>
+      
       <h2 style="color: #B38E41;">Demande de propriété</h2>
       <p>Bonjour ${formData.name},</p>
       <p>Nous avons bien reçu votre demande d’estimation et nous vous en remercions. Un responsable vous contactera sous peu afin de vous proposer des créneaux disponibles pour la visite sur place. Voici le récapitulatif des informations concernant votre bien à estimer:</p>
@@ -61,16 +59,14 @@ export async function POST(request: Request) {
       <p>Nous vous contacterons très prochainement.</p>
       
       <hr style="border-top: 1px solid #ddd; margin: 20px 0;" />
-      <p style="color: #999;">© ${currentYear} Marc Careri. Tous droits réservés.</p>
+      <p style="color: #999;">© ${currentYear} Fiduciaire Premier Luxembourg S.A.. Tous droits réservés.</p>
     </div>
     `;
 
     // HTML cho email quản trị viên
     const adminEmailHtml = `
     <div style="font-family: Arial, sans-serif; color: #333; padding: 20px; border-radius: 8px;">
-      <div style="display: inline-block;">
-        <img src="${process.env.NEXT_PUBLIC_BASEURL}/${formData.emailType}-logo.png" alt="Logo" style="width: 200px;" />
-      </div>
+     
       <h2 style="color: #B38E41;">Nouvelle demande de propriété</h2>
       
       <h3>Informations personnelles :</h3>
@@ -83,13 +79,13 @@ export async function POST(request: Request) {
       </ul>
 
       <hr style="border-top: 1px solid #ddd; margin: 20px 0;" />
-      <p style="color: #999;">© ${currentYear} Marc Careri. Tous droits réservés.</p>
+      <p style="color: #999;">© ${currentYear} Fiduciaire Premier Luxembourg S.A.. Tous droits réservés.</p>
     </div>
     `;
 
     // Tùy chọn gửi email cho người dùng
     const userMailOptions = {
-      from: '"Marc Careri" <noreply@nextimmo.lu>',
+      from: '"Fiduciaire Premier Luxembourg S.A." <noreply@nextimmo.lu>',
       to: formData.email,
       subject: 'Votre demande de propriété a été reçue',
       html: userEmailHtml,
@@ -97,7 +93,7 @@ export async function POST(request: Request) {
 
     // Tùy chọn gửi email cho quản trị viên
     const adminMailOptions = {
-      from: '"Marc Careri" <noreply@nextimmo.lu>',
+      from: '"Fiduciaire Premier Luxembourg S.A." <noreply@nextimmo.lu>',
       to: (recipientEmails as any)[formData.emailType] || process.env.ADMIN_EMAIL,
       subject: 'Nouvelle demande de propriété',
       html: adminEmailHtml,
