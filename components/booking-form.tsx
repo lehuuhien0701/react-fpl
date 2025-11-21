@@ -63,7 +63,10 @@ export const BookingForm = ({
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          ...formData,
+          locale: currentLocale // truyền ngôn ngữ hiện tại vào API
+        }),
       });
 
       if (!response.ok) {
@@ -80,8 +83,12 @@ export const BookingForm = ({
         agreement: true
       });
 
-      // Redirect to the Thank You page
-      router.push('/thank-you');
+      // Redirect to the Thank You page, thêm locale nếu không phải mặc định
+      if (currentLocale === i18n.defaultLocale) {
+        router.push('/thank-you');
+      } else {
+        router.push(`/${currentLocale}/thank-you`);
+      }
     } catch (error) {
       console.error('Error submitting form:', error);
       alert(data.form_message.submit_error);

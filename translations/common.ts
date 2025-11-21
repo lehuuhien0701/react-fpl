@@ -9,7 +9,18 @@ export const translations: Translations = {
     message: "Your message",
     submit: "Submit",
     share_label: "Share this post",
-    other_articles_label: "Other articles"
+    other_articles_label: "Other articles",
+    email_subject_user: "Contact Request",
+    email_greeting_user: "Hello {name},",
+    email_body_user: "We have received your request and thank you for your message. A representative will contact you shortly to propose available time slots for an on-site visit. Here is a summary of the information you provided:",
+    email_personal_info: "Personal information:",
+    email_contact_soon: "We will contact you very soon.",
+    email_subject_admin: "New Contact Request",
+    first_name_label: "First Name",
+    last_name_label: "Last Name",
+    email_label: "Email",
+    phone_label: "Phone",
+    message_label: "Message"
   },
   fr: {
     previous: "Précédent",
@@ -19,7 +30,18 @@ export const translations: Translations = {
     message: "Votre message",
     submit: "Soumettre",
     share_label: "Partager cet article",
-    other_articles_label: "Autres articles"
+    other_articles_label: "Autres articles",
+    email_subject_user: "Demande de contact",
+    email_greeting_user: "Bonjour {name},",
+    email_body_user: "Nous avons bien reçu votre demande et nous vous en remercions. Un responsable vous contactera sous peu afin de vous proposer des créneaux disponibles pour la visite sur place. Voici le récapitulatif des informations que vous avez fournies :",
+    email_personal_info: "Informations personnelles :",
+    email_contact_soon: "Nous vous contacterons très prochainement.",
+    email_subject_admin: "Nouvelle demande de contact",
+    first_name_label: "Nom",
+    last_name_label: "Prénom",
+    email_label: "Email",
+    phone_label: "Téléphone",
+    message_label: "Message"
   },
   de: {
     previous: "Zurück",
@@ -29,6 +51,17 @@ export const translations: Translations = {
     message: "Ihre Nachricht",
     submit: "Einreichen",
     share_label: "Diesen Beitrag teilen", 
-    other_articles_label: "Andere Artikel"
+    other_articles_label: "Andere Artikel",
+    email_subject_user: "Kontaktanfrage",
+    email_greeting_user: "Hallo {name},",
+    email_body_user: "Wir haben Ihre Anfrage erhalten und danken Ihnen für Ihre Nachricht. Ein Mitarbeiter wird Sie in Kürze kontaktieren, um verfügbare Termine für einen Vor-Ort-Besuch vorzuschlagen. Hier sind die Informationen, die Sie bereitgestellt haben:",
+    email_personal_info: "Persönliche Informationen:",
+    email_contact_soon: "Wir werden Sie sehr bald kontaktieren.",
+    email_subject_admin: "Neue Kontaktanfrage",
+    first_name_label: "Vorname",
+    last_name_label: "Nachname",
+    email_label: "E-Mail",
+    phone_label: "Telefon",
+    message_label: "Nachricht"
   }
 };
