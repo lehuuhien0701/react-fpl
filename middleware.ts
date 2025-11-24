@@ -34,7 +34,10 @@ export function middleware(request: NextRequest) {
   const isBot = /googlebot|bingbot|slurp|duckduckbot|baiduspider|yandexbot|sogou|exabot|facebot|ia_archiver/i.test(userAgent)
   const isCrawler = isBot || !acceptLanguage
   if (pathname === '/' && isCrawler) {
-    return NextResponse.next()
+    // Rewrite về trang mặc định thay vì next()
+    const url = request.nextUrl.clone()
+    url.pathname = `/${i18n.defaultLocale}/`
+    return NextResponse.rewrite(url)
   }
 
   // Handle default locale paths - redirect /en to /
