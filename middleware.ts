@@ -28,10 +28,12 @@ export function middleware(request: NextRequest) {
     return NextResponse.next()
   }
   
-  // Nếu là bot/crawler thì không redirect/rewrite, chỉ trả về trang mặc định
+  // Nếu là bot/crawler hoặc không có accept-language thì không redirect/rewrite, chỉ trả về trang mặc định
   const userAgent = request.headers.get('user-agent') || ''
+  const acceptLanguage = request.headers.get('accept-language')
   const isBot = /googlebot|bingbot|slurp|duckduckbot|baiduspider|yandexbot|sogou|exabot|facebot|ia_archiver/i.test(userAgent)
-  if (pathname === '/' && isBot) {
+  const isCrawler = isBot || !acceptLanguage
+  if (pathname === '/' && isCrawler) {
     return NextResponse.next()
   }
 
