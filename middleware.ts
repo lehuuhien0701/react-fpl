@@ -27,6 +27,13 @@ export function middleware(request: NextRequest) {
   if (PUBLIC_FILE.test(pathname) || STATIC_ROUTES.some(route => pathname.startsWith(route))) {
     return NextResponse.next()
   }
+  
+  // Nếu là bot/crawler thì không redirect/rewrite, chỉ trả về trang mặc định
+  const userAgent = request.headers.get('user-agent') || ''
+  const isBot = /googlebot|bingbot|slurp|duckduckbot|baiduspider|yandexbot|sogou|exabot|facebot|ia_archiver/i.test(userAgent)
+  if (pathname === '/' && isBot) {
+    return NextResponse.next()
+  }
 
   // Handle default locale paths - redirect /en to /
   if (pathname === `/${i18n.defaultLocale}` || pathname.startsWith(`/${i18n.defaultLocale}/`)) {
