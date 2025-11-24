@@ -84,6 +84,7 @@ export default async function LocaleLayout({
 
     return (
         <html lang={currentLocale}>
+            
             <ViewTransitions>
                 <CartProvider>
                     <body
