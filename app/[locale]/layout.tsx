@@ -84,7 +84,22 @@ export default async function LocaleLayout({
 
     return (
         <html lang={currentLocale}>
-            
+            <head>
+                {/* Robots tag for Google indexing */}
+                <meta name="robots" content="index, follow" />
+                {/* Google tag (gtag.js) */}
+                <script async src="https://www.googletagmanager.com/gtag/js?id=G-YPJWT55EBW"></script>
+                <script
+                  dangerouslySetInnerHTML={{
+                    __html: `
+                      window.dataLayer = window.dataLayer || [];
+                      function gtag(){dataLayer.push(arguments);}
+                      gtag('js', new Date());
+                      gtag('config', 'G-YPJWT55EBW');
+                    `,
+                  }}
+                />
+            </head>
             <ViewTransitions>
                 <CartProvider>
                     <body
